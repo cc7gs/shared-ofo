@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import {Button} from 'antd'
-import './App.css';
+import React, { Component } from 'react'
+import Admin from './admin'
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Button>Click</Button>
+        <Admin />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
