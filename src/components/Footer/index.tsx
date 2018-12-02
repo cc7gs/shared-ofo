@@ -1,9 +1,9 @@
 import React from 'react'
-
+import './index.less'
 const Footer=()=>{
     return(
-        <div>
-            Footer
+        <div className='footer'>
+            CopyRight@ cc.wgs.top Footer
         </div>
     );
 }

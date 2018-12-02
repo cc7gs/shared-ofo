@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import {Link} from 'react-router-dom'
 import NavList from './../../config/menuConfig'
 import { Menu } from 'antd'
 import './index.less'
@@ -8,11 +9,9 @@ const NavLeft = () => {
   const [menu, setMenu] = useState([])
   useEffect(() => {
     const menuTreeNode = renderMenu(NavList)
-
-    setMenu(menuTreeNode);
-    console.log(menuTreeNode);
+    setMenu(menuTreeNode)
   }, [])
-  const renderMenu = (data:any) => {
+  const renderMenu = (data: any) => {
     return data.map((item: any) => {
       if (item.children) {
         return (
@@ -21,10 +20,10 @@ const NavLeft = () => {
           </SubMenu>
         )
       }
-      return <Menu.Item key={item.key}>{item.title}</Menu.Item>
+      return <Menu.Item key={item.key}><Link to={item.key}>{item.title}</Link></Menu.Item>
     })
   }
-  console.log('menu', menu)
+
   return (
     <>
       <div className="logo">
