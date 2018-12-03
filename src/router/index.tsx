@@ -6,6 +6,11 @@ import Login from '../pages/login'
 import Home from '../pages/home'
 
 import Buttons from '../pages/ui/buttons'
+import Modals from '../pages/ui/modals'
+import Loading from '../pages/ui/loading'
+import Notice from '../pages/ui/notice'
+import Message from '../pages/ui/message'
+import Tabs from '../pages/ui/tabs'
 import NotFound from '../pages/nomatch'
 const IRouter = () => {
   return (
@@ -19,6 +24,11 @@ const IRouter = () => {
                 <Switch>
                   <Route path='/home' component={Home} />
                   <Route path='/ui/buttons' component={Buttons} />
+                  <Route path='/ui/modals' component={Modals} />
+                  <Route path='/ui/loadings' component={Loading} />
+                  <Route path='/ui/notification' component={Notice} />
+                  <Route path='/ui/messages' component={Message} />
+                  <Route path='/ui/tabs' component={Tabs} />
                   <Route component={NotFound} />
                 </Switch>
               </Admin>
