@@ -13,6 +13,7 @@ import Message from '../pages/ui/message'
 import Tabs from '../pages/ui/tabs'
 import FormLogin from '../pages/form/login'
 import FormRegister from '../pages/form/register'
+import basicTable from '../pages/table/basicTable'
 import NotFound from '../pages/nomatch'
 const IRouter = () => {
   return (
@@ -33,6 +34,7 @@ const IRouter = () => {
                   <Route path='/ui/tabs' component={Tabs} />
                   <Route path='/form/login' component={FormLogin} />
                   <Route path='/form/reg' component={FormRegister} />
+                  <Route path='/table/basic' component={basicTable} />
                   <Route component={NotFound} />
                 </Switch>
               </Admin>
