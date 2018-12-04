@@ -3,7 +3,7 @@ import './index.less'
 const Footer=()=>{
     return(
         <div className='footer'>
-            CopyRight@ cc.wgs.top Footer
+            CopyRight@ ccwgs.top Footer
         </div>
     );
 }

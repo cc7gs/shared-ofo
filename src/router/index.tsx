@@ -11,6 +11,8 @@ import Loading from '../pages/ui/loading'
 import Notice from '../pages/ui/notice'
 import Message from '../pages/ui/message'
 import Tabs from '../pages/ui/tabs'
+import FormLogin from '../pages/form/login'
+import FormRegister from '../pages/form/register'
 import NotFound from '../pages/nomatch'
 const IRouter = () => {
   return (
@@ -29,6 +31,8 @@ const IRouter = () => {
                   <Route path='/ui/notification' component={Notice} />
                   <Route path='/ui/messages' component={Message} />
                   <Route path='/ui/tabs' component={Tabs} />
+                  <Route path='/form/login' component={FormLogin} />
+                  <Route path='/form/reg' component={FormRegister} />
                   <Route component={NotFound} />
                 </Switch>
               </Admin>
