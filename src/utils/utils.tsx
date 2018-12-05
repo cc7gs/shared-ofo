@@ -15,5 +15,18 @@ export default {
       ':' +
       date.getSeconds()
     )
+  },
+  pagination(data:any,callback:(cur:number)=>void){
+      return {
+        onChange:(current:number)=>callback(current),
+        current:data.result.page,
+        total:data.result.total,
+        pageSize:data.result.page_size,
+        showQuickJumper:true,
+        showTotal:()=>{
+          return `共${data.result.total}条`
+        }
+    }
+
   }
 }
