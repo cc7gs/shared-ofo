@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Card, Table, Spin, Modal } from 'antd'
-import { ColumnProps, TableRowSelection } from 'antd/lib/table'
-import utils from '../../utils/utils'
+import { ColumnProps } from 'antd/lib/table'
 import axios from '../../axios'
 interface IUser {
   title: string
@@ -49,19 +48,13 @@ const columns: ColumnProps<IUser>[] = [
     dataIndex: 'address'
   }
 ]
-const initalSelect: number[] = []
-const params={
-    page:1
+const params = {
+  page: 1
 }
 const baseTable = () => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
-  const [selectKey, setSelectKey] = useState(initalSelect);
-  const [paginations,setPagination]=useState({});
-  const rowSelection: TableRowSelection<object> = {
-    type: 'radio',
-    selectedRowKeys: selectKey
-  }
+
   useEffect(() => {
     request()
   }, [])
@@ -71,59 +64,35 @@ const baseTable = () => {
       .ajax({
         url: '/table/list',
         data: {
-          param:params.page
+          param: params.page
         }
       })
       .then((res: any) => {
-        let list=res.result.list;
+        let list = res.result.list
         if (res.code === 0) {
           list.map((item: any, index: number) => {
             item.key = index
           })
-          console.log(res);
-          setPagination(utils.pagination(res,(current)=>{
-              //to-do 当点击分页时，将当前页数传递给后台
-              params.page=current;
-              //重新请求数据
-              request();
-          }))
-          setData(list);
+          setData(list)
         }
+        //关闭loading
         setLoading(false)
       })
       .catch(() => {
         setLoading(false)
       })
   }
-  const onRowClick = (record: any, index: any) => {
-    let selectKey = [index]
-    setSelectKey(selectKey)
-    Modal.info({
-      content: `${record.username}喜欢${record.interest}`
-    })
-  }
+
   return (
     <div>
-      <Card title='基础表格'>
+      <Card title='头部固定'>
         <Spin spinning={loading}>
-          <Table columns={columns} dataSource={data} />
+          <Table columns={columns} dataSource={data} pagination={false} />
         </Spin>
       </Card>
-      <Card title='有选择按钮的'>
+      <Card title='左侧固定'>
         <Spin spinning={loading}>
-          <Table
-            rowSelection={rowSelection}
-            onRow={(record, index) => {
-              return {
-                onClick: () => {
-                  onRowClick(record, index)
-                }
-              }
-            }}
-            columns={columns}
-            dataSource={data}
-            pagination={paginations}
-          />
+          <Table columns={columns} dataSource={data} pagination={false} />
         </Spin>
       </Card>
     </div>

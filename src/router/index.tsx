@@ -14,6 +14,7 @@ import Tabs from '../pages/ui/tabs'
 import FormLogin from '../pages/form/login'
 import FormRegister from '../pages/form/register'
 import basicTable from '../pages/table/basicTable'
+import highTable from '../pages/table/highTable'
 import NotFound from '../pages/nomatch'
 const IRouter = () => {
   return (
@@ -35,6 +36,8 @@ const IRouter = () => {
                   <Route path='/form/login' component={FormLogin} />
                   <Route path='/form/reg' component={FormRegister} />
                   <Route path='/table/basic' component={basicTable} />
+                  <Route path='/table/high' component={highTable} />
+
                   <Route component={NotFound} />
                 </Switch>
               </Admin>
