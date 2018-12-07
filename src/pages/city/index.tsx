@@ -7,6 +7,7 @@ const Option = Select.Option
 //记录当前页数
 const params = { page: 1 }
 const City = () => {
+  
   //存储当前城市管理的数据
   const [cityData, setCityData] = useState([])
   const [pagination, setPagination] = useState({})
@@ -95,21 +96,23 @@ const City = () => {
     // const { getFieldsValue } = cityForm.current;
     // let cityInfo=getFieldsValue();
     //方式二 通过 wrappedComponentRef
-    let {getFieldsValue} = formRef.props.form;
-    let cityInfo =getFieldsValue();
-    console.log(cityInfo);
-    axios.ajax({
-      url:'/city/open',
-      data:{
-        params:cityInfo
-      }
-    }).then((res:any)=>{
-        if(res.code===0){
-           message.success(res.message);
-           setIsShowOpenCity(false);
-           request();
+    let { getFieldsValue } = formRef.props.form
+    let cityInfo = getFieldsValue()
+    console.log(cityInfo)
+    axios
+      .ajax({
+        url: '/city/open',
+        data: {
+          params: cityInfo
         }
-    })
+      })
+      .then((res: any) => {
+        if (res.code === 0) {
+          message.success(res.message)
+          setIsShowOpenCity(false)
+          request()
+        }
+      })
   }
   return (
     <>
@@ -117,11 +120,11 @@ const City = () => {
         <FilterForm />
       </Card>
       <Card style={{ margin: '10px 0 0 0' }}>
-        <Button type="primary" onClick={() => setIsShowOpenCity(true)}>
+        <Button type='primary' onClick={() => setIsShowOpenCity(true)}>
           开通城市
         </Button>
       </Card>
-      <div className="content-wrap">
+      <div className='content-wrap'>
         <Table
           bordered
           columns={columns}
@@ -130,7 +133,7 @@ const City = () => {
         />
       </div>
       <Modal
-        title="开通城市"
+        title='开通城市'
         visible={isShowOpenCity}
         onCancel={() => setIsShowOpenCity(false)}
         onOk={handleSubmit}
@@ -149,46 +152,46 @@ type IProps = Readonly<{
 const CreateForm = (props: IProps) => {
   const { getFieldDecorator } = props.form
   return (
-    <Form layout="inline">
-      <FormItem label="城市">
+    <Form layout='inline'>
+      <FormItem label='城市'>
         {getFieldDecorator('city_id')(
-          <Select style={{ width: 100 }} placeholder="全部">
-            <Option value="">全部</Option>
-            <Option value="1">北京市</Option>
-            <Option value="2">天津市</Option>
-            <Option value="3">深圳市</Option>
+          <Select style={{ width: 100 }} placeholder='全部'>
+            <Option value=''>全部</Option>
+            <Option value='1'>北京市</Option>
+            <Option value='2'>天津市</Option>
+            <Option value='3'>深圳市</Option>
           </Select>
         )}
       </FormItem>
-      <FormItem label="用车模式">
+      <FormItem label='用车模式'>
         {getFieldDecorator('mode')(
-          <Select style={{ width: 140 }} placeholder="全部">
-            <Option value="">全部</Option>
-            <Option value="1">指定停车点模式</Option>
-            <Option value="2">禁停区模式</Option>
+          <Select style={{ width: 140 }} placeholder='全部'>
+            <Option value=''>全部</Option>
+            <Option value='1'>指定停车点模式</Option>
+            <Option value='2'>禁停区模式</Option>
           </Select>
         )}
       </FormItem>
-      <FormItem label="营运模式">
+      <FormItem label='营运模式'>
         {getFieldDecorator('op_mode')(
-          <Select style={{ width: 80 }} placeholder="全部">
-            <Option value="">全部</Option>
-            <Option value="1">自营</Option>
-            <Option value="2">加盟</Option>
+          <Select style={{ width: 80 }} placeholder='全部'>
+            <Option value=''>全部</Option>
+            <Option value='1'>自营</Option>
+            <Option value='2'>加盟</Option>
           </Select>
         )}
       </FormItem>
-      <FormItem label="加盟商授权状态">
+      <FormItem label='加盟商授权状态'>
         {getFieldDecorator('auth_status')(
-          <Select style={{ width: 100 }} placeholder="全部">
-            <Option value="">全部</Option>
-            <Option value="1">已授权</Option>
-            <Option value="2">未授权</Option>
+          <Select style={{ width: 100 }} placeholder='全部'>
+            <Option value=''>全部</Option>
+            <Option value='1'>已授权</Option>
+            <Option value='2'>未授权</Option>
           </Select>
         )}
       </FormItem>
       <FormItem>
-        <Button type="primary" style={{ margin: '0 10px' }}>
+        <Button type='primary' style={{ margin: '0 10px' }}>
           查询
         </Button>
         <Button>重置</Button>
@@ -210,35 +213,35 @@ class CreateCityForm extends React.Component<IProps> {
     }
     const { getFieldDecorator } = this.props.form
     return (
-      <Form layout="horizontal">
-        <FormItem label="选择城市" {...formItemLayout}>
+      <Form layout='horizontal'>
+        <FormItem label='选择城市' {...formItemLayout}>
           {getFieldDecorator('city_id', {
             initialValue: '1'
           })(
             <Select style={{ width: 100 }}>
-              <Option value="">全部</Option>
-              <Option value="1">北京市</Option>
-              <Option value="2">天津市</Option>
+              <Option value=''>全部</Option>
+              <Option value='1'>北京市</Option>
+              <Option value='2'>天津市</Option>
             </Select>
           )}
         </FormItem>
-        <FormItem label="营运模式" {...formItemLayout}>
+        <FormItem label='营运模式' {...formItemLayout}>
           {getFieldDecorator('op_mode', {
             initialValue: '1'
           })(
             <Select style={{ width: 100 }}>
-              <Option value="1">自营</Option>
-              <Option value="2">加盟</Option>
+              <Option value='1'>自营</Option>
+              <Option value='2'>加盟</Option>
             </Select>
           )}
         </FormItem>
-        <FormItem label="用车模式" {...formItemLayout}>
+        <FormItem label='用车模式' {...formItemLayout}>
           {getFieldDecorator('use_mode', {
             initialValue: '1'
           })(
             <Select style={{ width: 100 }}>
-              <Option value="1">指定停车点</Option>
-              <Option value="2">禁停区</Option>
+              <Option value='1'>指定停车点</Option>
+              <Option value='2'>禁停区</Option>
             </Select>
           )}
         </FormItem>
