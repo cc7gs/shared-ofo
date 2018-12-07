@@ -22,6 +22,7 @@ const IRouter = () => {
     <Router>
       <App>
         <Switch>
+          <Route path="/login" component={Login} />
           <Route
             path='/'
             render={() => (
@@ -44,7 +45,6 @@ const IRouter = () => {
               </Admin>
             )}
           />
-          <Route path="/login" component={Login} />
         </Switch>
       </App>
     </Router>
