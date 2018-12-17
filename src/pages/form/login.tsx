@@ -7,7 +7,7 @@ type Iprops = Readonly<{
 }>
 
 const Login = (props: Iprops) => {
-  const { getFieldDecorator, getFieldsError, validateFields,isFieldsTouched } = props.form
+  const { getFieldDecorator, getFieldsError, validateFields,isFieldTouched } = props.form
   
   const formItemLayout={
     labelCol:{
@@ -19,10 +19,11 @@ const Login = (props: Iprops) => {
       md:18
     }
   }
-  //判读是否有错误信息 isFieldsTouched 用于判读用户是否触发过表单空间
+  //判读是否有错误信息 isFieldTouched 用于判读用户是否触发过表单空间
   //当没有触发过表单控价时,将btn设置为disabled
   const hasErrors = (fieldsError: any) => {
-    return Object.keys(fieldsError).some(item => fieldsError[item]) || !isFieldsTouched()
+    let  flag=isFieldTouched('userName') &&isFieldTouched('userPwd');
+    return Object.keys(fieldsError).some(item => fieldsError[item]) || !flag
   }
   //处理登录逻辑
   const handleLogin = (e: any) => {
@@ -97,6 +98,7 @@ const Login = (props: Iprops) => {
           </FormItem>
         </Form>
       </Card>
+  
     </div>
   )
 }

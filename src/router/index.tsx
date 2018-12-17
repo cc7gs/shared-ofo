@@ -16,6 +16,7 @@ import FormRegister from '../pages/form/register'
 import basicTable from '../pages/table/basicTable'
 import highTable from '../pages/table/highTable'
 import City from '../pages/city'
+import Order from '../pages/order'
 import NotFound from '../pages/nomatch'
 const IRouter = () => {
   return (
@@ -40,6 +41,7 @@ const IRouter = () => {
                   <Route path='/table/basic' component={basicTable} />
                   <Route path='/table/high' component={highTable} />
                   <Route path='/city' component={City} />
+                  <Route path='/order' component={Order} />
                   <Route component={NotFound} />
                 </Switch>
               </Admin>

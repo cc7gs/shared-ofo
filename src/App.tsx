@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {createDB} from './PouchDB'
+createDB();
 class App extends Component {
   render() {
     return (
