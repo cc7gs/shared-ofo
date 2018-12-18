@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'antd'
 import './index.less'
+import {connect} from 'react-redux'
 import Util from '../../utils/utils'
 import axios from '../../axios'
-const Header = () => {
+const Header = (props:any) => {
   const [userInfo, setUserInfo] = useState('')
   const [time, setTime] = useState('')
   const [weather, setWeather] = useState('')
@@ -41,7 +42,7 @@ const Header = () => {
       </Row>
       <Row className="breadCrumb">
         <Col span={4} className="breadCrumb-title">
-          首页
+          {props.menuName}
         </Col>
         <Col span={20} className="weather">
           <span className="date">{time}</span>
@@ -54,4 +55,7 @@ const Header = () => {
     </div>
   )
 }
-export default Header
+const mapStateToProps=(state:any)=>{
+  return {menuName:state.menuName}
+}
+export default connect(mapStateToProps)(Header)

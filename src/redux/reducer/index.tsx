@@ -6,7 +6,7 @@ const initalState={
     menuName:'首页'
 }
 export default (state=initalState,action:any)=>{
- switch(action){
+ switch(action.type){
      case type.SWITCH_MENU:
         return{
             ...state,

@@ -5,7 +5,6 @@ import Footer from './components/Footer'
 import NavLeft from './components/NavLeft'
 import './assets/css/common.less'
 const Admin = (props:any) => {
-  console.log('111');
   return (
     <Row className="container">
       {/* 左边 */}
