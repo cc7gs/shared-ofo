@@ -1,6 +1,6 @@
-import Jsonp from 'jsonp'
-import axios from 'axios'
-import { Modal } from 'antd'
+import Jsonp from 'jsonp';
+import axios from 'axios';
+import { Modal } from 'antd';
 const Axios = {
   jsonp(options: any) {
     return new Promise((resolve: any, reject: any) => {
@@ -11,17 +11,17 @@ const Axios = {
         },
         (error: any, response: any) => {
           if (response.status == 'success') {
-            resolve(response)
+            resolve(response);
           } else {
-            reject(error.message)
+            reject(error.message);
           }
         }
-      )
-    })
+      );
+    });
   },
   ajax(options: any) {
     const baseApi =
-      'https://www.easy-mock.com/mock/5c0645417b27ee7217ffeca9/mockapi'
+      'https://www.easy-mock.com/mock/5c0645417b27ee7217ffeca9/mockapi';
     return new Promise((resolve, reject) => {
       axios({
         method: 'get',
@@ -33,23 +33,22 @@ const Axios = {
         .then(response => {
           let res = response.data;
           if (response.status === 200) {
-           
             if (res.code === 0) {
-              resolve(res)
+              resolve(res);
             } else {
               Modal.info({
                 title: '提示',
                 content: res.message ? res.message : '数据加载失败,请从新加载'
-              })
+              });
             }
           } else {
             reject(res);
           }
         })
         .catch(() => {
-          console.log('数据请求地址有误')
-        })
-    })
+          console.log('数据请求地址有误');
+        });
+    });
   }
-}
-export default Axios
+};
+export default Axios;

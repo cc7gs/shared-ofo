@@ -1,20 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { Card, Form, Table, Button, Select, message, Modal } from 'antd'
-import axios from './../../axios'
-import utils from '../../utils/utils'
-const FormItem = Form.Item
-const Option = Select.Option
+import React, { useState, useEffect, useRef } from 'react';
+import { Card, Form, Table, Button, Select, message, Modal } from 'antd';
+import axios from './../../axios';
+import utils from '../../utils/utils';
+const FormItem = Form.Item;
+const Option = Select.Option;
 //记录当前页数
-const params = { page: 1 }
+const params = { page: 1 };
 const City = () => {
-  
   //存储当前城市管理的数据
-  const [cityData, setCityData] = useState([])
-  const [pagination, setPagination] = useState({})
+  const [cityData, setCityData] = useState([]);
+  const [pagination, setPagination] = useState({});
   //控制模态框是否显示
-  const [isShowOpenCity, setIsShowOpenCity] = useState(false)
+  const [isShowOpenCity, setIsShowOpenCity] = useState(false);
   // const cityForm = useRef(null) as any;
-  let formRef: any = null
+  let formRef: any = null;
   //表格列的数据定义
   const columns = [
     {
@@ -43,7 +42,7 @@ const City = () => {
       title: '城市管理员',
       dataIndex: 'city_admins',
       render(arr: any) {
-        return arr.map((item: any) => item.user_name).join(',')
+        return arr.map((item: any) => item.user_name).join(',');
       }
     },
     {
@@ -59,10 +58,10 @@ const City = () => {
       title: '操作人',
       dataIndex: 'sys_user_name'
     }
-  ]
+  ];
   useEffect(() => {
-    request()
-  }, [])
+    request();
+  }, []);
   //获取数据
   const request = () => {
     axios
@@ -73,32 +72,32 @@ const City = () => {
         }
       })
       .then((res: any) => {
-        let data = res.result.item_list
+        let data = res.result.item_list;
         //获取city数据
         setCityData(
           data.map((item: any, index: any) => {
-            item.key = index
-            return item
+            item.key = index;
+            return item;
           })
-        )
+        );
         //设置分页数据
         setPagination(
           utils.pagination(res, current => {
-            params.page = current
-            request()
+            params.page = current;
+            request();
           })
-        )
-      })
-  }
+        );
+      });
+  };
   //城市开通提交事件
   const handleSubmit = () => {
     //方式一 通过 ref
     // const { getFieldsValue } = cityForm.current;
     // let cityInfo=getFieldsValue();
     //方式二 通过 wrappedComponentRef
-    let { getFieldsValue } = formRef.props.form
-    let cityInfo = getFieldsValue()
-    console.log(cityInfo)
+    let { getFieldsValue } = formRef.props.form;
+    let cityInfo = getFieldsValue();
+    console.log(cityInfo);
     axios
       .ajax({
         url: '/city/open',
@@ -108,23 +107,23 @@ const City = () => {
       })
       .then((res: any) => {
         if (res.code === 0) {
-          message.success(res.message)
-          setIsShowOpenCity(false)
-          request()
+          message.success(res.message);
+          setIsShowOpenCity(false);
+          request();
         }
-      })
-  }
+      });
+  };
   return (
     <>
       <Card>
         <FilterForm />
       </Card>
       <Card style={{ margin: '10px 0 0 0' }}>
-        <Button type='primary' onClick={() => setIsShowOpenCity(true)}>
+        <Button type="primary" onClick={() => setIsShowOpenCity(true)}>
           开通城市
         </Button>
       </Card>
-      <div className='content-wrap'>
+      <div className="content-wrap">
         <Table
           bordered
           columns={columns}
@@ -133,7 +132,7 @@ const City = () => {
         />
       </div>
       <Modal
-        title='开通城市'
+        title="开通城市"
         visible={isShowOpenCity}
         onCancel={() => setIsShowOpenCity(false)}
         onOk={handleSubmit}
@@ -141,65 +140,66 @@ const City = () => {
         <OpenCityForm wrappedComponentRef={(inst: any) => (formRef = inst)} />
       </Modal>
     </>
-  )
-}
-export default City
+  );
+};
+export default City;
 
 type IProps = Readonly<{
-  form: any
-  wrappedComponentRef?: any
-}>
+  form: any;
+  wrappedComponentRef?: any;
+}>;
 const CreateForm = (props: IProps) => {
-  const { getFieldDecorator } = props.form
+  const { getFieldDecorator } = props.form;
   return (
-    <Form layout='inline'>
-      <FormItem label='城市'>
+    <Form layout="inline">
+      <FormItem label="城市">
         {getFieldDecorator('city_id')(
-          <Select style={{ width: 100 }} placeholder='全部'>
-            <Option value=''>全部</Option>
-            <Option value='1'>北京市</Option>
-            <Option value='2'>天津市</Option>
-            <Option value='3'>深圳市</Option>
+          <Select style={{ width: 100 }} placeholder="全部">
+            <Option value="">全部</Option>
+            <Option value="1">北京市</Option>
+            <Option value="2">天津市</Option>
+            <Option value="3">深圳市</Option>
           </Select>
         )}
       </FormItem>
-      <FormItem label='用车模式'>
+      <FormItem label="用车模式">
         {getFieldDecorator('mode')(
-          <Select style={{ width: 140 }} placeholder='全部'>
-            <Option value=''>全部</Option>
-            <Option value='1'>指定停车点模式</Option>
-            <Option value='2'>禁停区模式</Option>
+          <Select style={{ width: 140 }} placeholder="全部">
+            <Option value="">全部</Option>
+            <Option value="1">指定停车点模式</Option>
+            <Option value="2">禁停区模式</Option>
           </Select>
         )}
       </FormItem>
-      <FormItem label='营运模式'>
+      <FormItem label="营运模式">
         {getFieldDecorator('op_mode')(
-          <Select style={{ width: 80 }} placeholder='全部'>
-            <Option value=''>全部</Option>
-            <Option value='1'>自营</Option>
-            <Option value='2'>加盟</Option>
+          <Select style={{ width: 80 }} placeholder="全部">
+            <Option value="">全部</Option>
+            <Option value="1">自营</Option>
+            <Option value="2">加盟</Option>
           </Select>
         )}
       </FormItem>
-      <FormItem label='加盟商授权状态'>
+      <FormItem label="加盟商授权状态">
         {getFieldDecorator('auth_status')(
-          <Select style={{ width: 100 }} placeholder='全部'>
-            <Option value=''>全部</Option>
-            <Option value='1'>已授权</Option>
-            <Option value='2'>未授权</Option>
+          <Select style={{ width: 100 }} placeholder="全部">
+            <Option value="">全部</Option>
+            <Option value="1">已授权</Option>
+            <Option value="2">未授权</Option>
           </Select>
         )}
       </FormItem>
       <FormItem>
-        <Button type='primary' style={{ margin: '0 10px' }}>
+        <Button type="primary" style={{ margin: '0 10px' }}>
           查询
         </Button>
         <Button>重置</Button>
       </FormItem>
     </Form>
-  )
-}
-const FilterForm = Form.create({})(CreateForm)
+  );
+};
+const FilterForm = Form.create({})(CreateForm);
+
 //一定要用类 否则无法使用 wrappedComponentRef
 class CreateCityForm extends React.Component<IProps> {
   render() {
@@ -210,43 +210,43 @@ class CreateCityForm extends React.Component<IProps> {
       wrapperCol: {
         span: 19
       }
-    }
-    const { getFieldDecorator } = this.props.form
+    };
+    const { getFieldDecorator } = this.props.form;
     return (
-      <Form layout='horizontal'>
-        <FormItem label='选择城市' {...formItemLayout}>
+      <Form layout="horizontal">
+        <FormItem label="选择城市" {...formItemLayout}>
           {getFieldDecorator('city_id', {
             initialValue: '1'
           })(
             <Select style={{ width: 100 }}>
-              <Option value=''>全部</Option>
-              <Option value='1'>北京市</Option>
-              <Option value='2'>天津市</Option>
+              <Option value="">全部</Option>
+              <Option value="1">北京市</Option>
+              <Option value="2">天津市</Option>
             </Select>
           )}
         </FormItem>
-        <FormItem label='营运模式' {...formItemLayout}>
+        <FormItem label="营运模式" {...formItemLayout}>
           {getFieldDecorator('op_mode', {
             initialValue: '1'
           })(
             <Select style={{ width: 100 }}>
-              <Option value='1'>自营</Option>
-              <Option value='2'>加盟</Option>
+              <Option value="1">自营</Option>
+              <Option value="2">加盟</Option>
             </Select>
           )}
         </FormItem>
-        <FormItem label='用车模式' {...formItemLayout}>
+        <FormItem label="用车模式" {...formItemLayout}>
           {getFieldDecorator('use_mode', {
             initialValue: '1'
           })(
             <Select style={{ width: 100 }}>
-              <Option value='1'>指定停车点</Option>
-              <Option value='2'>禁停区</Option>
+              <Option value="1">指定停车点</Option>
+              <Option value="2">禁停区</Option>
             </Select>
           )}
         </FormItem>
       </Form>
-    )
+    );
   }
 }
-const OpenCityForm = Form.create()(CreateCityForm)
+const OpenCityForm = Form.create()(CreateCityForm);

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import NavList from './../../config/menuConfig';
 import { Menu } from 'antd';
-import {connect} from 'react-redux';
-import {switchMenu} from './../../redux/action'
+import { connect } from 'react-redux';
+import { switchMenu } from './../../redux/action';
 import './index.less';
 import logo from '../../assets/images/logo.svg';
 const SubMenu = Menu.SubMenu;
-const NavLeft = (props:any) => {
+const NavLeft = (props: any) => {
   const [menu, setMenu] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState('home');
   useEffect(() => {
@@ -34,8 +34,8 @@ const NavLeft = (props:any) => {
   };
   //点击菜单时处理函数
   const handleMenuClick = (obj: any) => {
-    const {dispatch}=props;
-    const {item}=obj;
+    const { dispatch } = props;
+    const { item } = obj;
     //派发选中的菜单
     dispatch(switchMenu(item.props.title));
     console.log(item.props.title);

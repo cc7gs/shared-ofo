@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import { Row, Col } from 'antd'
-import './index.less'
-import {connect} from 'react-redux'
-import Util from '../../utils/utils'
-import axios from '../../axios'
-const Header = (props:any) => {
-  const [userInfo, setUserInfo] = useState('')
-  const [time, setTime] = useState('')
-  const [weather, setWeather] = useState('')
-  const [dayPictureUrl, setDayPictureUrl] = useState('')
+import React, { useState, useEffect } from 'react';
+import { Row, Col } from 'antd';
+import './index.less';
+import { connect } from 'react-redux';
+import Util from '../../utils/utils';
+import axios from '../../axios';
+const Header = (props: any) => {
+  const [userInfo, setUserInfo] = useState('');
+  const [time, setTime] = useState('');
+  const [weather, setWeather] = useState('');
+  const [dayPictureUrl, setDayPictureUrl] = useState('');
   useEffect(() => {
-    setUserInfo('cc')
+    setUserInfo('cc');
     setInterval(() => {
-      let systime = Util.formateDate(new Date().getTime())
-      setTime(systime)
-    }, 1000)
-    getWeatherAPIData()
-  }, [])
+      let systime = Util.formateDate(new Date().getTime());
+      setTime(systime);
+    }, 1000);
+    getWeatherAPIData();
+  }, []);
   const getWeatherAPIData = () => {
-    let city = '上海'
+    let city = '上海';
     axios
       .jsonp({
         url:
@@ -28,12 +28,12 @@ const Header = (props:any) => {
       })
       .then((res: any) => {
         if (res.status == 'success') {
-          let data = res.results[0].weather_data[0]
-          setWeather(data.weather)
-          setDayPictureUrl(data.dayPictureUrl)
+          let data = res.results[0].weather_data[0];
+          setWeather(data.weather);
+          setDayPictureUrl(data.dayPictureUrl);
         }
-      })
-  }
+      });
+  };
   return (
     <div className="header">
       <Row className="header-top">
@@ -53,9 +53,9 @@ const Header = (props:any) => {
         </Col>
       </Row>
     </div>
-  )
-}
-const mapStateToProps=(state:any)=>{
-  return {menuName:state.menuName}
-}
-export default connect(mapStateToProps)(Header)
+  );
+};
+const mapStateToProps = (state: any) => {
+  return { menuName: state.menuName };
+};
+export default connect(mapStateToProps)(Header);
