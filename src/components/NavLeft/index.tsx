@@ -38,7 +38,6 @@ const NavLeft = (props: any) => {
     const { item } = obj;
     //派发选中的菜单
     dispatch(switchMenu(item.props.title));
-    console.log(item.props.title);
     //将当前点击菜单标记为选择状态
     setSelectedKeys(obj.key);
   };
