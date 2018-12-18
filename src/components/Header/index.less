@@ -1,41 +1,49 @@
-.header{
+.header {
     background-color: #ffffff;
-    .header-top{
+    .header-top {
         height: 40px;
         line-height: 40px;
-        padding:0 20px;
+        padding: 0 20px;
         text-align: right;
-        a{
+        a {
             margin-left: 40px;
         }
+        .login {
+            line-height: 40px;
+            text-align: left;
+            img {
+                height: 30px;
+                vertical-align: middle;
+            }
+        }
     }
-    .breadCrumb{
+    .breadCrumb {
         border-top: 1px solid #40a9ff;
         height: 30px;
         line-height: 30px;
         padding: 0 20px;
-        .breadCrumb-title{
+        .breadCrumb-title {
             text-align: center;
-            &::after{
+            &::after {
                 position: absolute;
-                content:'';
-                left:46%;
-                top:30px;
-                border-top:9px solid #fff;
-                border-left:12px solid transparent;
+                content: '';
+                left: 46%;
+                top: 30px;
+                border-top: 9px solid #fff;
+                border-left: 12px solid transparent;
                 border-right: 12px solid transparent;
             }
         }
-        .weather{
+        .weather {
             text-align: right;
         }
-        .weather-img{
-            padding:0 20px;
-            img{
+        .weather-img {
+            padding: 0 20px;
+            img {
                 height: 15px;
             }
         }
-        .weather-detail{
+        .weather-detail {
             vertical-align: middle;
         }
     }

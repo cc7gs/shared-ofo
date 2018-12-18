@@ -1,32 +1,32 @@
-import React from 'react'
-import { Button, Card,message } from 'antd'
-import './index.less'
-type IMessage = 'success' | 'info' | 'warning' | 'error'|'loading'
+import React from 'react';
+import { Button, Card, message } from 'antd';
+import './index.less';
+type IMessage = 'success' | 'info' | 'warning' | 'error' | 'loading';
 
 const messages = () => {
-    const handleMessages=(type:IMessage)=>{
-        message[type]('玩转 react');
-    }
+  const handleMessages = (type: IMessage) => {
+    message[type]('玩转 react');
+  };
   return (
-    <div className='message'>
+    <div className="message">
       <Card>
-        <Button type='primary' onClick={() => handleMessages('success')}>
+        <Button type="primary" onClick={() => handleMessages('success')}>
           Success
         </Button>
-        <Button type='primary' onClick={() => handleMessages('info')}>
+        <Button type="primary" onClick={() => handleMessages('info')}>
           Info
         </Button>
-        <Button type='primary' onClick={() => handleMessages('warning')}>
+        <Button type="primary" onClick={() => handleMessages('warning')}>
           Warning
         </Button>
-        <Button type='primary' onClick={() => handleMessages('error')}>
+        <Button type="primary" onClick={() => handleMessages('error')}>
           Error
         </Button>
-        <Button type='primary' onClick={() => handleMessages('loading')}>
+        <Button type="primary" onClick={() => handleMessages('loading')}>
           Loading
         </Button>
       </Card>
     </div>
-  )
-}
-export default messages
+  );
+};
+export default messages;

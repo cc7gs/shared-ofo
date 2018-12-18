@@ -1,11 +1,10 @@
-import React from 'react'
-import { Row, Col } from 'antd'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import NavLeft from './components/NavLeft'
-import './assets/css/common.less'
-const Admin = (props:any) => {
-  console.log('111');
+import React from 'react';
+import { Row, Col } from 'antd';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import NavLeft from './components/NavLeft';
+import './assets/css/common.less';
+const Admin = (props: any) => {
   return (
     <Row className="container">
       {/* 左边 */}
@@ -15,17 +14,15 @@ const Admin = (props:any) => {
       {/* 右边 */}
       <Col span={21} className="main">
         <Header />
-        <Row className="content">
-           {props.children}
-        </Row>
+        <Row className="content">{props.children}</Row>
         <Footer />
       </Col>
     </Row>
-  )
-}
+  );
+};
 
 // class Admin extends React.Component {
-  
+
 //   render() {
 //   console.log('111');
 //     return (
@@ -45,4 +42,4 @@ const Admin = (props:any) => {
 //   }
 // }
 
-export default Admin
+export default Admin;

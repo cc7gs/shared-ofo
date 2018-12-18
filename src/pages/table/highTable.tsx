@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import { Card, Table, Spin, Modal } from 'antd'
-import { ColumnProps } from 'antd/lib/table'
-import axios from '../../axios'
+import React, { useState, useEffect } from 'react';
+import { Card, Table, Spin, Modal } from 'antd';
+import { ColumnProps } from 'antd/lib/table';
+import axios from '../../axios';
 interface IUser {
-  title: string
-  dataIndex: string
-  key?: string
-  render?: any
-  sortOrder?: 'descend' | 'ascend'
+  title: string;
+  dataIndex: string;
+  key?: string;
+  render?: any;
+  sortOrder?: 'descend' | 'ascend';
 }
 //模拟横向数据，由于数据一样则key值存在相同则报错..
 const columns1: ColumnProps<IUser>[] = [
@@ -27,7 +27,7 @@ const columns1: ColumnProps<IUser>[] = [
     title: '性别',
     dataIndex: 'sex',
     render(sex: number) {
-      return sex === 1 ? '男' : '女'
+      return sex === 1 ? '男' : '女';
     },
     width: 100
   },
@@ -42,8 +42,8 @@ const columns1: ColumnProps<IUser>[] = [
         '3': '踢足球',
         '4': '唱歌',
         '5': '打乒乓球'
-      }
-      return config[state]
+      };
+      return config[state];
     },
     width: 150
   },
@@ -83,15 +83,15 @@ const columns1: ColumnProps<IUser>[] = [
     fixed: 'right',
     width: 300
   }
-]
+];
 
 const params = {
   page: 1
-}
+};
 const baseTable = () => {
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [sortOrder, setsortOrder] = useState('descend')
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [sortOrder, setsortOrder] = useState('descend');
   const columns: ColumnProps<IUser>[] = [
     {
       title: 'id',
@@ -109,7 +109,7 @@ const baseTable = () => {
       title: '性别',
       dataIndex: 'sex',
       render(sex: number) {
-        return sex === 1 ? '男' : '女'
+        return sex === 1 ? '男' : '女';
       },
       width: 100
     },
@@ -124,8 +124,8 @@ const baseTable = () => {
           '3': '踢足球',
           '4': '唱歌',
           '5': '打乒乓球'
-        }
-        return config[state]
+        };
+        return config[state];
       },
       width: 150
     },
@@ -138,12 +138,12 @@ const baseTable = () => {
       title: '地址',
       dataIndex: 'address'
     }
-  ]
+  ];
   useEffect(() => {
-    request()
-  }, [])
+    request();
+  }, []);
   const request = () => {
-    setLoading(true)
+    setLoading(true);
     axios
       .ajax({
         url: '/table/list',
@@ -152,24 +152,24 @@ const baseTable = () => {
         }
       })
       .then((res: any) => {
-        let list = res.result.list
+        let list = res.result.list;
         if (res.code === 0) {
           list.map((item: any, index: number) => {
-            item.key = index
-          })
-          setData(list)
+            item.key = index;
+          });
+          setData(list);
         }
         //关闭loading
-        setLoading(false)
+        setLoading(false);
       })
       .catch(() => {
-        setLoading(false)
-      })
-  }
+        setLoading(false);
+      });
+  };
 
   return (
     <div>
-      <Card title='头部固定'>
+      <Card title="头部固定">
         <Spin spinning={loading}>
           <Table
             bordered
@@ -178,13 +178,13 @@ const baseTable = () => {
             pagination={false}
             scroll={{ y: 240 }}
             onChange={(pagination, filters, sorter) => {
-              setsortOrder(sorter.order)
+              setsortOrder(sorter.order);
             }}
           />
         </Spin>
       </Card>
-     
-     <Card title='左侧固定'>
+
+      <Card title="左侧固定">
         <Spin spinning={loading}>
           <Table
             columns={columns1}
@@ -195,6 +195,6 @@ const baseTable = () => {
         </Spin>
       </Card>
     </div>
-  )
-}
-export default baseTable
+  );
+};
+export default baseTable;
