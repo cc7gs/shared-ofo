@@ -18,6 +18,7 @@ import highTable from '../pages/table/highTable';
 import City from '../pages/city';
 import Order from '../pages/order';
 import Common from '../common';
+import OrderDetail from './../pages/order/detail'
 import NotFound from '../pages/nomatch';
 const IRouter = () => {
   return (
@@ -30,7 +31,7 @@ const IRouter = () => {
             render={() => (
               <Common>
                 <Switch>
-                  <Route path="/common/order/detail/:orderId" component={Login} />
+                  <Route path="/common/order/detail/:orderId" component={OrderDetail} />
                 </Switch>
               </Common>
             )}

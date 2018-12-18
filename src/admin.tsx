@@ -1,9 +1,9 @@
 import React from 'react';
 import { Row, Col } from 'antd';
+import './assets/css/common.less';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import NavLeft from './components/NavLeft';
-import './assets/css/common.less';
 const Admin = (props: any) => {
   return (
     <Row className="container">
