@@ -1,19 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Card,
-  Modal,
-  Button,
-  Form,
-  Table,
-  Select,
-  DatePicker,
-  Col
-} from 'antd';
+import { Card, Modal, Button, Table } from 'antd';
 import { TableRowSelection } from 'antd/lib/table';
+import FilterForm from './../../components/BasicForm';
 import axios from './../../axios';
 import utils from '../../utils/utils';
-const FormItem = Form.Item;
-const Option = Select.Option;
 //定义表格数据类型
 const columns = [
   {
@@ -67,6 +57,51 @@ const columns = [
 const params = { page: 1 };
 //初始化选择行
 const initalSelect: number[] = [];
+//订单表单格式
+const FormList = [
+  {
+    type: 'SELECT',
+    label: '城市',
+    field: 'city_id',
+    width: 100,
+    placeholder: '全部',
+    list: [
+      {
+        id: 1,
+        name: '北京市'
+      },
+      {
+        id: 2,
+        name: '天津市'
+      },
+      {
+        id: 3,
+        name: '深圳市'
+      }
+    ]
+  },
+  {
+    type: 'date',
+    label: '订单时间'
+  },
+  {
+    type: 'SELECT',
+    label: '订单状态',
+    field: 'order_status',
+    width: 100,
+    placeholder: '全部',
+    list: [
+      {
+        id: 1,
+        name: '进行中'
+      },
+      {
+        id: 2,
+        name: '行程结束'
+      }
+    ]
+  }
+];
 const OrderManager = () => {
   //存储订单数据
   const [orderData, setOrderData] = useState([]);
@@ -127,10 +162,17 @@ const OrderManager = () => {
     setSelectKey(selectKey);
     setSelectRow(record);
   };
+  //处理查询事件
+  const handleFilterForm = (fieldsValue: any) => {
+    console.log(fieldsValue);
+  };
   return (
     <>
       <Card>
-        <FilterForm />
+        <FilterForm
+          formList={FormList}
+          onFilterSubmit={(fieldsValue: any) => handleFilterForm(fieldsValue)}
+        />
       </Card>
       <Card style={{ marginTop: 10 }}>
         <Button
@@ -161,69 +203,4 @@ const OrderManager = () => {
     </>
   );
 };
-
 export default OrderManager;
-
-type IProps = Readonly<{
-  form: any;
-}>;
-const CreateFilterForm = (props: IProps) => {
-  const { getFieldDecorator } = props.form;
-  return (
-    <Form layout="inline">
-      <FormItem label="城市">
-        {getFieldDecorator('city_id')(
-          <Select style={{ width: 100 }} placeholder="全部">
-            <Option value="1">北京市</Option>
-            <Option value="2">天津市</Option>
-            <Option value="3">深圳市</Option>
-          </Select>
-        )}
-      </FormItem>
-      <FormItem label="订单时间">
-        <Col span={11}>
-          <FormItem>
-            {getFieldDecorator('start_time')(
-              <DatePicker showTime format="YYYYY-MM-DD HH:mm:ss" />
-            )}
-          </FormItem>
-        </Col>
-        <Col span={2}>
-          <span
-            style={{
-              display: 'inline-block',
-              width: '100%',
-              textAlign: 'center'
-            }}
-          >
-            ~
-          </span>
-        </Col>
-        <Col span={11}>
-          <FormItem>
-            {getFieldDecorator('start_time')(
-              <DatePicker showTime format="YYYYY-MM-DD HH:mm:ss" />
-            )}
-          </FormItem>
-        </Col>
-      </FormItem>
-      <FormItem label="订单状态">
-        {getFieldDecorator('order_status')(
-          <Select style={{ width: 100 }} placeholder="全部">
-            <Option value="1">进行中</Option>
-            <Option value="2">行程结束</Option>
-            <Option value="2">行程结束</Option>
-            <Option value="2">行程结束</Option>
-          </Select>
-        )}
-      </FormItem>
-      <FormItem>
-        <Button type="primary" style={{ margin: '0 10px' }}>
-          查询
-        </Button>
-        <Button>重置</Button>
-      </FormItem>
-    </Form>
-  );
-};
-const FilterForm = Form.create()(CreateFilterForm);
