@@ -3,8 +3,8 @@ import { Card, Form, Table, Button, Select, message, Modal } from 'antd';
 import axios from './../../axios';
 import utils from '../../utils/utils';
 import FilterForm from './../../components/BasicForm';
-const FormItem=Form.Item;
-const Option=Select.Option;
+const FormItem = Form.Item;
+const Option = Select.Option;
 //记录当前页数
 const params = { page: 1 };
 //表格列的数据定义
@@ -52,7 +52,6 @@ const columns = [
     dataIndex: 'sys_user_name'
   }
 ];
-
 const City = () => {
   //存储当前城市管理的数据
   const [cityData, setCityData] = useState([]);
@@ -202,13 +201,16 @@ const City = () => {
       });
   };
   //处理查询事件
-  const handleFilterForm=(fieldsValue:any)=>{
+  const handleFilterForm = (fieldsValue: any) => {
     console.log(fieldsValue);
-  }
+  };
   return (
     <>
       <Card>
-        <FilterForm formList={FormList} onFilterSubmit={(fieldsValue:any)=>handleFilterForm(fieldsValue)} />
+        <FilterForm
+          formList={FormList}
+          onFilterSubmit={(fieldsValue: any) => handleFilterForm(fieldsValue)}
+        />
       </Card>
       <Card style={{ margin: '10px 0 0 0' }}>
         <Button type="primary" onClick={() => setIsShowOpenCity(true)}>

@@ -56,7 +56,7 @@ const columns = [
 //记录当前页数
 const params = { page: 1 };
 //初始化选择行
-const initalSelect: number[] = [];
+const initalSelect: string[] = [];
 //订单表单格式
 const FormList = [
   {
@@ -113,8 +113,12 @@ const OrderManager = () => {
   const [selectRow, setSelectRow] = useState(() => {});
   //表格选择的类型
   const rowSelection: TableRowSelection<object> = {
-    type: 'radio',
-    selectedRowKeys: selectKey
+    type: 'checkbox',
+    selectedRowKeys: selectKey,
+    onChange:(selectKey,selectRowKeys)=>{
+      console.log(selectRowKeys);
+        setSelectKey(selectKey as any);
+    }
   };
   useEffect(() => {
     request();
@@ -158,8 +162,19 @@ const OrderManager = () => {
   };
   //选择行元素
   const onRowClick = (record: any, index: any) => {
-    let selectKey = [index];
-    setSelectKey(selectKey);
+    //@todo
+    let oldSelectKey=selectKey;
+      //该行还没有被点击,则点击 若已经点击过则取消check
+    if(oldSelectKey.indexOf(index)){
+      console.log('no');
+      oldSelectKey=[...selectKey,index];    
+    }else{
+      console.log('yes');
+      oldSelectKey=oldSelectKey.splice(index,1);
+    }
+    let keys=rowSelection.type==='radio'?[index]:oldSelectKey
+    console.log(keys,'keys');
+    setSelectKey(keys);
     setSelectRow(record);
   };
   //处理查询事件
