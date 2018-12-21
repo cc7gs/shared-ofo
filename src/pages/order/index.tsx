@@ -163,17 +163,15 @@ const OrderManager = () => {
   //选择行元素
   const onRowClick = (record: any, index: any) => {
     //@todo
-    let oldSelectKey=selectKey;
+    let oldSelectKey:any=selectKey;
       //该行还没有被点击,则点击 若已经点击过则取消check
-    if(oldSelectKey.indexOf(index)){
-      console.log('no');
-      oldSelectKey=[...selectKey,index];    
+    if(oldSelectKey.includes(index)){
+      oldSelectKey.splice(oldSelectKey.indexOf(index),1);
+
     }else{
-      console.log('yes');
-      oldSelectKey=oldSelectKey.splice(index,1);
+      oldSelectKey=[...oldSelectKey,index];    
     }
     let keys=rowSelection.type==='radio'?[index]:oldSelectKey
-    console.log(keys,'keys');
     setSelectKey(keys);
     setSelectRow(record);
   };
