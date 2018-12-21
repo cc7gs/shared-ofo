@@ -19,6 +19,7 @@ import City from '../pages/city';
 import Order from '../pages/order';
 import Common from '../common';
 import OrderDetail from './../pages/order/detail'
+import Rich from './../pages/rich'
 import NotFound from '../pages/nomatch';
 const IRouter = () => {
   return (
@@ -54,6 +55,7 @@ const IRouter = () => {
                   <Route path="/table/high" component={highTable} />
                   <Route path="/city" component={City} />
                   <Route path="/order" component={Order} />
+                  <Route path="/rich" component={Rich} />
                   <Route component={NotFound} />
                 </Switch>
               </Admin>
